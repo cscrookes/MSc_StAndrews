@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameShelf - Board & Byte</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/png" href="puzzle_piece.png">
+    <!-- Source: https://emoji.aranja.com/#google_vignette -->
+
+</head>
+<body>
+    <header>
+        <!-- <div class="row"> -->
+            <!-- <div>
+                <img src="puzzle_piece.png" alt="Puzzle Piece Icon" class="logo">
+            </div> -->
+            <div class="container">
+                <h1>Board & Byte 🧩</h1>
+                <p class="tagline">Your Ultimate Game Collection</p>
+            </div>
+        <!-- </div> -->
+        <!-- I wanted to include the logo image, but it messed up the layout a bit too much. -->
+    </header>
+
+    <main class="container">
+        <div class="layout">
+            <!-- Catalogue Section -->
+            <section class="catalogue-section">
+                <div class="catalogue-header">
+                    <h2>Our Games</h2>
+                    
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Search by name or category..."
+                            aria-label="Search games"
+                        >
+                    </div>
+
+                    <!-- Sorting Controls -->
+                    <div class="sort-controls">
+                        <label for="sortSelect">Sort by:</label>
+                        <select id="sortSelect" aria-label="Sort catalogue">
+                            <option value="default">Default</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="category">Category</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="catalogueList" class="catalogue-grid">
+                    <!-- Catalogue items will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Order Section -->
+            <aside class="order-section">
+                <h2>Your Order</h2>
+                
+                <div id="orderList" class="order-list">
+                    <p class="empty-order">Your cart is empty</p>
+                </div>
+
+                <div class="order-summary">
+                    <div class="subtotal">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">£0.00</span>
+                    </div>
+                    <div class="discount-section">
+                        <input 
+                            type="text" 
+                            id="discountCode" 
+                            placeholder="Enter discount code"
+                            aria-label="Discount code"
+                        >
+                        <button id="applyDiscount" class="btn-secondary">Apply</button>
+                    </div>
+                    <div id="discountDisplay" class="discount-display" style="display: none;">
+                        <span>Discount:</span>
+                        <span id="discountAmount">-£0.00</span>
+                    </div>
+                    <div class="total">
+                        <span>Total:</span>
+                        <span id="total">£0.00</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 GameShelf. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
