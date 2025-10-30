@@ -7,6 +7,7 @@ const catalogue = [
     category: "Puzzle",
     description:
       "Immerse yourself in the wild with this stunning puzzle featuring the African savanna and its diverse wildlife.",
+    media: "Board",
     options: [
       { name: "1000 Pieces", priceModifier: 0 },
       { name: "2500 Pieces", priceModifier: 10 },
@@ -20,6 +21,7 @@ const catalogue = [
     category: "RPG",
     description:
       "Embark on an epic adventure in a vast fantasy world filled with magic, monsters, and legendary treasures.",
+    media: "Board",
     options: [
       { name: "Standard Edition", priceModifier: 0 },
       { name: "Collector's Edition", priceModifier: 20 },
@@ -31,7 +33,9 @@ const catalogue = [
     name: "Snakes and Ladders",
     price: 39.99,
     category: "Strategy",
-    description: "Experience the thrill of high-stakes board gaming with new twists and challenges in this classic game.",
+    description:
+      "Experience the thrill of high-stakes board gaming with new twists and challenges in this classic game.",
+    media: "Board",
     options: [
       { name: "Base Game", priceModifier: 0 },
       { name: "2025 Reboot Edition", priceModifier: 9.99 },
@@ -42,7 +46,9 @@ const catalogue = [
     name: "Mystery Manor",
     price: 29.99,
     category: "Strategy",
-    description: "Solve intricate puzzles and uncover dark secrets in this atmospheric mystery adventure game.",
+    description:
+      "Solve intricate puzzles and uncover dark secrets in this atmospheric mystery adventure game.",
+    media: "Board",
     options: [{ name: "Standard Edition", priceModifier: 0 }],
   },
   {
@@ -52,6 +58,7 @@ const catalogue = [
     category: "Strategy",
     description:
       "Conquer the world in this classic strategy game with new maps, missions, and multiplayer modes for endless fun.",
+    media: "Board",
     options: [
       { name: "Standard Edition", priceModifier: 0 },
       { name: "Enhanced Edition", priceModifier: 18 },
@@ -62,7 +69,9 @@ const catalogue = [
     name: "30 Seconds",
     price: 34.99,
     category: "Trivia",
-    description: "A fun and engaging trivia game perfect for parties, featuring a wide range of topics and difficulty levels.",
+    description:
+      "A fun and engaging trivia game perfect for parties, featuring a wide range of topics and difficulty levels.",
+    media: "Board",
     options: [
       { name: "Standard Edition", priceModifier: 0 },
       { name: "UK Edition", priceModifier: 12 },
@@ -75,6 +84,7 @@ const catalogue = [
     category: "Trivia",
     description:
       "The ultimate sports trivia game featuring thousands of questions across all major sports and leagues.",
+    media: "Board",
     options: [
       { name: "Standard Edition", priceModifier: 0 },
       { name: "All-Star Edition", priceModifier: 20 },
@@ -82,20 +92,22 @@ const catalogue = [
   },
   {
     id: 8,
-    name: " Hues and Cues",
+    name: "Hues and Cues",
     price: 19.99,
     category: "Indie",
-    description: "A charming color-themed party game that challenges your creativity and color knowledge.",
+    description:
+      "A charming color-themed party game that challenges your creativity and color knowledge.",
+    media: "Board",
     options: [{ name: "Standard Edition", priceModifier: 0 }],
   },
   {
     id: 9,
     name: "Catan",
-    // this is my favorite board game!
     price: 19.99,
     category: "Strategy",
     description:
       "Build, trade, and settle in this beloved strategy game set on the island of Catan with new expansions available.",
+    media: "Board",
     options: [
       { name: "Base Game", priceModifier: 0 },
       { name: "Seafarers Expansion", priceModifier: 5 },
@@ -111,6 +123,7 @@ const catalogue = [
     category: "Strategy",
     description:
       "A social word game where players give one-word clues to help their team identify secret agents among a grid of words.",
+    media: "Board",
     options: [
       { name: "Standard Edition", priceModifier: 0 },
       { name: "Pictures Edition", priceModifier: 5 },
@@ -123,6 +136,7 @@ const catalogue = [
     category: "Word",
     description:
       "A fast-paced word game where players race to create interconnected words using letter tiles in a Scrabble-like fashion.",
+    media: "Board",
     options: [
       { name: "Standard Edition", priceModifier: 0 },
       { name: "Travel Edition", priceModifier: -7 },
@@ -135,18 +149,85 @@ const catalogue = [
     category: "Word",
     description:
       "The classic word game where players use letter tiles to create words on a game board for points.",
+    media: "Board",
     options: [
       { name: "Standard Edition", priceModifier: 0 },
       { name: "Travel Edition", priceModifier: -10 },
     ],
-  }
-]
+  },
+
+  {
+    id: 13,
+    name: "God of War: Ragnarök",
+    price: 69.99,
+    category: "RPG",
+    description:
+      "Join Kratos and Atreus as they face the end of days in this epic Norse saga filled with cinematic combat and emotion.",
+    media: "Byte",
+    options: [
+      { name: "Standard Edition", priceModifier: 0 },
+      { name: "Deluxe Edition", priceModifier: 20 },
+    ],
+  },
+  {
+    id: 14,
+    name: "Marvel’s Spider-Man 2",
+    price: 69.99,
+    category: "RPG",
+    description:
+      "Swing through New York as Peter Parker and Miles Morales in this fast-paced superhero adventure.",
+    media: "Byte",
+    options: [
+      { name: "Standard Edition", priceModifier: 0 },
+      { name: "Ultimate Edition", priceModifier: 30 },
+    ],
+  },
+  {
+    id: 15,
+    name: "Horizon Forbidden West",
+    price: 59.99,
+    category: "RPG",
+    description:
+      "Explore distant lands and battle awe-inspiring machines in this breathtaking open-world adventure starring Aloy.",
+    media: "Byte",
+    options: [
+      { name: "Standard Edition", priceModifier: 0 },
+      { name: "Complete Edition", priceModifier: 25 },
+    ],
+  },
+  {
+    id: 16,
+    name: "The Last of Us Part I",
+    price: 69.99,
+    category: "RPG",
+    description:
+      "Experience the beloved post-apocalyptic story rebuilt for PlayStation 5 with enhanced graphics and performance.",
+    media: "Byte",
+    options: [
+      { name: "Standard Edition", priceModifier: 0 },
+      { name: "Digital Deluxe Edition", priceModifier: 15 },
+    ],
+  },
+  {
+    id: 17,
+    name: "Gran Turismo 7",
+    price: 69.99,
+    category: "Racing",
+    description:
+      "Master the art of driving in this realistic racing simulator featuring hundreds of cars and legendary tracks.",
+    media: "Byte",
+    options: [
+      { name: "Standard Edition", priceModifier: 0 },
+      { name: "25th Anniversary Edition", priceModifier: 25 },
+    ],
+  },
+];
 
 // Discount Codes
 const discountCodes = {
-  GAMESNOW: { type: "percentage", value: 12, description: "12% off" },
+  GETPLAYING: { type: "percentage", value: 12, description: "12% off" },
   SAVE20: { type: "percentage", value: 20, description: "20% off" },
-  WELCOME: { type: "fixed", value: 5, description: "£5 off" },
+  WELCOME5: { type: "fixed", value: 5, description: "£5 off" },
   BIGDEAL: { type: "fixed", value: 15, description: "£15 off" },
   5032: {type: "fixed", value: 50.32, description: "Just Over £50 off" },
   // Added a high value discount code for testing
@@ -204,6 +285,7 @@ function renderCatalogue() {
             <div class="item-header">
                 <h3 class="item-name">${item.name}</h3>
                 <span class="item-category">${item.category}</span>
+                <span class="item-media">${item.media}</span>
             </div>
             <p class="item-price">£${item.price.toFixed(2)}</p>
             <p class="item-description">${item.description}</p>
@@ -343,6 +425,7 @@ function searchCatalogue() {
 }
 
 // Sort functionality
+// Sort functionality
 function sortCatalogue() {
   const sortValue = document.getElementById("sortSelect").value
   applySorting(sortValue)
@@ -353,7 +436,15 @@ function applySorting(sortValue) {
     sortValue = document.getElementById("sortSelect").value
   }
 
+  // Always reset to the full catalogue before applying a filter/sort
+  filteredCatalogue = [...catalogue]
+
   switch (sortValue) {
+    case "Board":
+    case "Byte":
+      // Filter only by media type
+      filteredCatalogue = catalogue.filter(item => item.media === sortValue)
+      break
     case "price-asc":
       filteredCatalogue.sort((a, b) => a.price - b.price)
       break
@@ -364,6 +455,7 @@ function applySorting(sortValue) {
       filteredCatalogue.sort((a, b) => a.category.localeCompare(b.category))
       break
     case "default":
+    default:
       filteredCatalogue.sort((a, b) => a.id - b.id)
       break
   }

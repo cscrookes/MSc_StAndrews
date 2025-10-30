@@ -29,7 +29,7 @@ https://www.w3.org/TR/WCAG21/#adaptable */
 
 /* Body */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Roboto", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(180deg, var(--light-bg) 0%, var(--primary-color) 100%);
   color: #333;
   min-height: 100vh;
@@ -196,6 +196,17 @@ main {
   border-radius: var(--rounded_radius);
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+.item-media {
+  display: inline-block;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--rounded_radius);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
 }
 
 .item-price {

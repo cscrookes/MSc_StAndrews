@@ -16,12 +16,12 @@
             <!-- <div>
                 <img src="puzzle_piece.png" alt="Puzzle Piece Icon" class="logo">
             </div> -->
+            <!-- Took this out as it wasn’t adapting when I changed the window size -->
             <div class="container">
                 <h1>Board & Byte 🧩</h1>
-                <p class="tagline">Your Ultimate Game Collection</p>
+                <p class="tagline">Your Board and Console Gaming Collection</p>
             </div>
         <!-- </div> -->
-        <!-- I wanted to include the logo image, but it messed up the layout a bit too much. -->
     </header>
 
     <main class="container">
@@ -48,13 +48,15 @@
                             <option value="default">Default</option>
                             <option value="price-asc">Price: Low to High</option>
                             <option value="price-desc">Price: High to Low</option>
-                            <option value="category">Category</option>
+                            <option value="category">Genre</option>
+                            <!-- Changed category to genre, as category could be board vs console -->
+                            <option value="Board">Board Games Only</option>
+                            <option value="Byte">Byte Games Only</option>
                         </select>
                     </div>
                 </div>
-
                 <div id="catalogueList" class="catalogue-grid">
-                    <!-- Catalogue items will be dynamically inserted here -->
+                    <!-- Catalogue items are dynamically inserted here -->
                 </div>
             </section>
 
