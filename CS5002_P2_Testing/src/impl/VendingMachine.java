@@ -1,5 +1,8 @@
 package impl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Comparator;
 
 import exceptions.LaneCodeAlreadyInUseException;
 import exceptions.LaneCodeNotRegisteredException;
@@ -10,62 +13,99 @@ import interfaces.IProductRecord;
 
 /**
  * This class represents a simple vending machine which can stock and sell products.
- *
  */
 public class VendingMachine implements IVendingMachine {
 
-    @Override
-    public void registerProduct(IVendingMachineProduct vendingMachineProduct) throws LaneCodeAlreadyInUseException {
-        // TODO Auto-generated method stub
+    // Each lane code maps to its ProductRecord
+    private final Map<String, IProductRecord> lanes = new HashMap<>();
 
+    @Override
+    public void registerProduct(IVendingMachineProduct vendingMachineProduct)
+            throws LaneCodeAlreadyInUseException {
+
+        String laneCode = vendingMachineProduct.getLaneCode();
+        if (lanes.containsKey(laneCode)) {
+            throw new LaneCodeAlreadyInUseException("Lane code already registered: " + laneCode);
+        }
+
+        // create a new record for this product
+        IProductRecord record = new ProductRecord(vendingMachineProduct);
+        lanes.put(laneCode, record);
     }
 
     @Override
-    public void unregisterProduct(IVendingMachineProduct vendingMachineProduct) throws LaneCodeNotRegisteredException {
-        // TODO Auto-generated method stub
+    public void unregisterProduct(IVendingMachineProduct vendingMachineProduct)
+            throws LaneCodeNotRegisteredException {
 
+        String laneCode = vendingMachineProduct.getLaneCode();
+        if (!lanes.containsKey(laneCode)) {
+            throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
+        }
+
+        lanes.remove(laneCode);
     }
 
     @Override
     public void addItem(String laneCode) throws LaneCodeNotRegisteredException {
-        // TODO Auto-generated method stub
-
+        IProductRecord record = lanes.get(laneCode);
+        if (record == null) {
+            throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
+        }
+        record.addItem();
     }
 
     @Override
-    public void buyItem(String laneCode) throws ProductUnavailableException, LaneCodeNotRegisteredException {
-        // TODO Auto-generated method stub
-
+    public void buyItem(String laneCode)
+            throws ProductUnavailableException, LaneCodeNotRegisteredException {
+        IProductRecord record = lanes.get(laneCode);
+        if (record == null) {
+            throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
+        }
+        record.buyItem();
     }
 
     @Override
     public int getNumberOfProducts() {
-        // TODO Auto-generated method stub
-        return 0;
+        return lanes.size();
     }
 
     @Override
     public int getTotalNumberOfItems() {
-        // TODO Auto-generated method stub
-        return 0;
+        int total = 0;
+        for (IProductRecord record : lanes.values()) {
+            total += record.getNumberAvailable();
+        }
+        return total;
     }
 
     @Override
     public int getNumberOfItems(String laneCode) throws LaneCodeNotRegisteredException {
-        // TODO Auto-generated method stub
-        return 0;
+        IProductRecord record = lanes.get(laneCode);
+        if (record == null) {
+            throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
+        }
+        return record.getNumberAvailable();
     }
 
     @Override
     public int getNumberOfSales(String laneCode) throws LaneCodeNotRegisteredException {
-        // TODO Auto-generated method stub
-        return 0;
+        IProductRecord record = lanes.get(laneCode);
+        if (record == null) {
+            throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
+        }
+        return record.getNumberOfSales();
     }
 
     @Override
     public IVendingMachineProduct getMostPopular() throws LaneCodeNotRegisteredException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        if (lanes.isEmpty()) {
+            throw new LaneCodeNotRegisteredException("No products registered in machine");
+        }
 
+        // find record with max sales
+        return lanes.values().stream()
+                .max(Comparator.comparingInt(IProductRecord::getNumberOfSales))
+                .get() // safe because we already checked for empty
+                .getProduct();
+    }
 }

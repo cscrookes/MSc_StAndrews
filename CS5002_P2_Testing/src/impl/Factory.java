@@ -5,21 +5,19 @@ import interfaces.IVendingMachineProduct;
 import interfaces.IVendingMachine;
 import interfaces.IProductRecord;
 
-
 /**
  * This class implements a singleton factory.
- *
  */
 public final class Factory implements IFactory {
 
     private static IFactory factoryInstance = null;
 
     private Factory() {
-
+        // private to enforce singleton
     }
 
     /**
-     * Method which returns an instance of the singleton Factory class.
+     * Returns the singleton Factory instance.
      * @return the instance of the Factory
      */
     public static IFactory getInstance() {
@@ -31,20 +29,16 @@ public final class Factory implements IFactory {
 
     @Override
     public IVendingMachineProduct makeVendingMachineProduct(String laneCode, String description) {
-        // TODO Auto-generated method stub
-        return null;
+        return new VendingMachineProduct(laneCode, description);
     }
 
     @Override
     public IProductRecord makeProductRecord(IVendingMachineProduct vendingMachineProduct) {
-        // TODO Auto-generated method stub
-        return null;
+        return new ProductRecord(vendingMachineProduct);
     }
 
     @Override
     public IVendingMachine makeVendingMachine() {
-        // TODO Auto-generated method stub
-        return null;
+        return new VendingMachine();
     }
-
 }
