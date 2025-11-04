@@ -1,13 +1,5 @@
 package exceptions;
 public class LaneCodeNotRegisteredException extends Exception {
-
-    /**
-     * Constructs a new LaneCodeNotRegisteredException with no detail message.
-     */
-    public LaneCodeNotRegisteredException() {
-        super();
-    }
-
     /**
      * Constructs a new LaneCodeNotRegisteredException with the specified detail message.
      *
