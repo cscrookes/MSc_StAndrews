@@ -1,8 +1,20 @@
 package exceptions;
-
-/**
- * This exception should be used to indicate that a lane code has been presented to the system before it has been registered for use for an item.
- *
- */
 public class LaneCodeNotRegisteredException extends Exception {
+
+    /**
+     * Constructs a new LaneCodeNotRegisteredException with no detail message.
+     */
+    public LaneCodeNotRegisteredException() {
+        super();
+    }
+
+    /**
+     * Constructs a new LaneCodeNotRegisteredException with the specified detail message.
+     *
+     * @param message the detail message
+     */
+    public LaneCodeNotRegisteredException(String message) {
+        super(message);
+    }
 }
+

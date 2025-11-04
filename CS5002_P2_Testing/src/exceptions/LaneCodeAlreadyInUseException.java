@@ -1,8 +1,20 @@
 package exceptions;
 
-/**
- * This exception should be used to indicate the illegal state when multiple products share the same lane in the vending machine.
- *
- */
 public class LaneCodeAlreadyInUseException extends Exception {
+    package exceptions;
+    /**
+     * Constructs a new LaneCodeAlreadyInUseException with no detail message.
+     */
+    public LaneCodeAlreadyInUseException() {
+        super();
+    }
+
+    /**
+     * Constructs a new LaneCodeAlreadyInUseException with the specified detail message.
+     *
+     * @param message the detail message
+     */
+    public LaneCodeAlreadyInUseException(String message) {
+        super(message);
+    }
 }
