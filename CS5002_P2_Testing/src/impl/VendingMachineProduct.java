@@ -47,10 +47,10 @@ public class VendingMachineProduct implements IVendingMachineProduct {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof VendingMachineProduct))
-            return false;
+        if (this == obj) {
+            return true; }
+        if (!(obj instanceof VendingMachineProduct)) {
+            return false; }
         VendingMachineProduct other = (VendingMachineProduct) obj;
         return laneCode.equals(other.laneCode);
     }
