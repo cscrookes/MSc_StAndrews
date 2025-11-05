@@ -18,6 +18,7 @@ public final class Factory implements IFactory {
 
     /**
      * Returns the singleton Factory instance.
+     * 
      * @return the instance of the Factory
      */
     public static IFactory getInstance() {

@@ -5,7 +5,8 @@ import interfaces.IVendingMachineProduct;
 import interfaces.IProductRecord;
 
 /**
- * This class represents a ProductRecord, recording information relating to a product sold in a vending machine.
+ * This class represents a ProductRecord, recording information relating to a
+ * product sold in a vending machine.
  */
 public class ProductRecord implements IProductRecord {
 

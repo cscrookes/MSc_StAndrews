@@ -1,7 +1,9 @@
 package exceptions;
+
 public class LaneCodeNotRegisteredException extends Exception {
     /**
-     * Constructs a new LaneCodeNotRegisteredException with the specified detail message.
+     * Constructs a new LaneCodeNotRegisteredException with the specified detail
+     * message.
      *
      * @param message the detail message
      */
@@ -9,4 +11,3 @@ public class LaneCodeNotRegisteredException extends Exception {
         super(message);
     }
 }
-

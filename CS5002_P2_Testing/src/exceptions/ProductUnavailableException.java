@@ -5,7 +5,8 @@ package exceptions;
  */
 public class ProductUnavailableException extends Exception {
     /**
-     * Constructs a new ProductUnavailableException with the specified detail message.
+     * Constructs a new ProductUnavailableException with the specified detail
+     * message.
      *
      * @param message the detail message
      */

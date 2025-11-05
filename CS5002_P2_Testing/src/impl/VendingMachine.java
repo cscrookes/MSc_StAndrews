@@ -12,7 +12,8 @@ import interfaces.IVendingMachine;
 import interfaces.IProductRecord;
 
 /**
- * This class represents a simple vending machine which can stock and sell products.
+ * This class represents a simple vending machine which can stock and sell
+ * products.
  */
 public class VendingMachine implements IVendingMachine {
 
