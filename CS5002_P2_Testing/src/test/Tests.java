@@ -24,62 +24,90 @@ public class Tests {
         assertNotNull(vendingMachineProduct);
     }
 
+    // FACTORY TESTS
     @Test
-    public void productRecordInitialValues() {
-        // Create a new product using the factory
-        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("B1", "Coca Cola");
-        
-        // Create a new product record for the product
-        IProductRecord record = Factory.getInstance().makeProductRecord(product);
-        
-        // Check that the record is not null
-        assertNotNull(record);
-        
-        // Check that the product stored in the record matches the product we created
-        assertEquals(product, record.getProduct());
-        
-        // Check that the initial number of items available is 0
-        assertEquals(0, record.getNumberAvailable());
-        
-        // Check that the initial number of sales is 0
-        assertEquals(0, record.getNumberOfSales());
+    public void factoryCreatesVendingMachine() {
+        IVendingMachine machine = Factory.getInstance().makeVendingMachine();
+        assertNotNull(machine);
     }
 
     @Test
-    public void addAndBuyItemUpdatesCounts() throws Exception {
-        // Create a new product
-        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("C1", "Sprite");
-        
-        // Create a product record for the product
+    public void factoryCreatesVendingMachineProduct() {
+        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("G1", "Lays Chips");
+        assertNotNull(product);
+    }
+
+    // VENDING MACHINE TESTS
+    @Test
+    public void vendingMachineNotNull() {
+        IVendingMachine machine = Factory.getInstance().makeVendingMachine();
+        assertNotNull(machine);
+    }
+
+    @Test
+    public void vendingMachineInitialProductCountIsZero() {
+        IVendingMachine machine = Factory.getInstance().makeVendingMachine();
+        assertEquals(0, machine.getNumberOfProducts());
+    }
+
+    // PRODUCT RECORD CREATION TESTS
+    @Test
+    public void productRecordInitialValues() {
+        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("B1", "Coca Cola");
         IProductRecord record = Factory.getInstance().makeProductRecord(product);
-        
-        // Add one item to the product record
-        record.addItem();
-        
-        // Check that the number of items available is now 1
-        assertEquals(1, record.getNumberAvailable());
-        
-        // Buy one item
-        record.buyItem();
-        
-        // Check that the number of items available decreased to 0
+
+        assertNotNull(record);
+        assertEquals(product, record.getProduct());
         assertEquals(0, record.getNumberAvailable());
-        
-        // CHeck that the number of sales increased to 1
+        assertEquals(0, record.getNumberOfSales());
+    }
+
+    // PRODUCT RECORD UPDATE TESTS
+    @Test
+    public void addAndBuyItemUpdatesCounts() throws Exception {
+        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("C1", "Sprite");
+        IProductRecord record = Factory.getInstance().makeProductRecord(product);
+
+        record.addItem();
+        assertEquals(1, record.getNumberAvailable());
+
+        record.buyItem();
+        assertEquals(0, record.getNumberAvailable());
         assertEquals(1, record.getNumberOfSales());
     }
 
     @Test
-    public void buyItemThrowsWhenUnavailable() {
-        // Create a new product
-        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("D1", "Doritos");
-        
-        // Create a product record for the product
+    public void multipleAddItemsIncreasesCountCorrectly() throws Exception {
+        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("E1", "Mars Bar");
         IProductRecord record = Factory.getInstance().makeProductRecord(product);
-        
-        // Attempt to buy an item when 0 are available
-        // Should throw ProductUnavailableException?
-        assertThrows(Exception.class, record::buyItem); // ProductUnavailableException
+
+        record.addItem();
+        record.addItem();
+        record.addItem();
+
+        assertEquals(3, record.getNumberAvailable());
+        assertEquals(0, record.getNumberOfSales());
+    }
+
+    @Test
+    public void multiplePurchasesUpdateCountsProperly() throws Exception {
+        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("F1", "Pepsi");
+        IProductRecord record = Factory.getInstance().makeProductRecord(product);
+
+        for (int i = 0; i < 5; i++) record.addItem();
+        for (int i = 0; i < 3; i++) record.buyItem();
+
+        assertEquals(2, record.getNumberAvailable());
+        assertEquals(3, record.getNumberOfSales());
+    }
+
+    // ERROR HANDLING TESTS
+    @Test
+    public void buyItemThrowsWhenUnavailable() {
+        IVendingMachineProduct product = Factory.getInstance().makeVendingMachineProduct("D1", "Doritos");
+        IProductRecord record = Factory.getInstance().makeProductRecord(product);
+
+        assertThrows(Exception.class, record::buyItem); // ProductUnavailableException expected
     }
 
 }
