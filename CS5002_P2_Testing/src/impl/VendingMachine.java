@@ -3,6 +3,7 @@ package impl;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Comparator;
+import java.util.regex.Pattern;
 
 import exceptions.LaneCodeAlreadyInUseException;
 import exceptions.LaneCodeNotRegisteredException;
@@ -20,16 +21,32 @@ public class VendingMachine implements IVendingMachine {
     // Each lane code maps to its ProductRecord
     private final Map<String, IProductRecord> lanes = new HashMap<>();
 
+    // Regex pattern: must contain one letter and one digit in any order (e.g. A1 or 3B)
+    private static final Pattern VALID_LANE_CODE = Pattern.compile("^(?:[A-Za-z]\\d|\\d[A-Za-z])$");
+
+    /**
+     * Validates that the lane code follows the correct format (one letter and one number).
+     */
+    private void validateLaneCodeFormat(String laneCode) {
+        if (laneCode == null || !VALID_LANE_CODE.matcher(laneCode).matches()) {
+            throw new IllegalArgumentException(
+                "Invalid lane code format: " + laneCode + 
+                ". Lane codes must contain exactly one letter and one number (e.g. A1 or 3D)."
+            );
+        }
+    }
+
     @Override
     public void registerProduct(IVendingMachineProduct vendingMachineProduct)
             throws LaneCodeAlreadyInUseException {
 
         String laneCode = vendingMachineProduct.getLaneCode();
+        validateLaneCodeFormat(laneCode);
+
         if (lanes.containsKey(laneCode)) {
             throw new LaneCodeAlreadyInUseException("Lane code already registered: " + laneCode);
         }
 
-        // create a new record for this product
         IProductRecord record = new ProductRecord(vendingMachineProduct);
         lanes.put(laneCode, record);
     }
@@ -39,6 +56,8 @@ public class VendingMachine implements IVendingMachine {
             throws LaneCodeNotRegisteredException {
 
         String laneCode = vendingMachineProduct.getLaneCode();
+        validateLaneCodeFormat(laneCode);
+
         if (!lanes.containsKey(laneCode)) {
             throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
         }
@@ -48,6 +67,8 @@ public class VendingMachine implements IVendingMachine {
 
     @Override
     public void addItem(String laneCode) throws LaneCodeNotRegisteredException {
+        validateLaneCodeFormat(laneCode);
+
         IProductRecord record = lanes.get(laneCode);
         if (record == null) {
             throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
@@ -58,6 +79,8 @@ public class VendingMachine implements IVendingMachine {
     @Override
     public void buyItem(String laneCode)
             throws ProductUnavailableException, LaneCodeNotRegisteredException {
+        validateLaneCodeFormat(laneCode);
+
         IProductRecord record = lanes.get(laneCode);
         if (record == null) {
             throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
@@ -81,6 +104,8 @@ public class VendingMachine implements IVendingMachine {
 
     @Override
     public int getNumberOfItems(String laneCode) throws LaneCodeNotRegisteredException {
+        validateLaneCodeFormat(laneCode);
+
         IProductRecord record = lanes.get(laneCode);
         if (record == null) {
             throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
@@ -90,6 +115,8 @@ public class VendingMachine implements IVendingMachine {
 
     @Override
     public int getNumberOfSales(String laneCode) throws LaneCodeNotRegisteredException {
+        validateLaneCodeFormat(laneCode);
+
         IProductRecord record = lanes.get(laneCode);
         if (record == null) {
             throw new LaneCodeNotRegisteredException("Lane code not registered: " + laneCode);
@@ -103,10 +130,9 @@ public class VendingMachine implements IVendingMachine {
             throw new LaneCodeNotRegisteredException("No products registered in machine");
         }
 
-        // find record with max sales
         return lanes.values().stream()
                 .max(Comparator.comparingInt(IProductRecord::getNumberOfSales))
-                .get() // safe because we already checked for empty
+                .get()
                 .getProduct();
     }
 }
