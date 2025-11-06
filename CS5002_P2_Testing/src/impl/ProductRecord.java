@@ -4,11 +4,16 @@ import exceptions.ProductUnavailableException;
 import interfaces.IVendingMachineProduct;
 import interfaces.IProductRecord;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class represents a ProductRecord, recording information relating to a
  * product sold in a vending machine.
  */
 public class ProductRecord implements IProductRecord {
+
+    private static final List<String> availableProducts = new ArrayList<>();
 
     private final IVendingMachineProduct product;
     private int numberOfSales;
@@ -21,14 +26,18 @@ public class ProductRecord implements IProductRecord {
      * @param product the product associated with this record
      * @throws IllegalArgumentException if the product is null
      */
-    public ProductRecord(IVendingMachineProduct product) {
-        if (product == null) {
-            throw new IllegalArgumentException("Product cannot be null");
-        }
-        this.product = product;
-        this.numberOfSales = 0;
-        this.numberAvailable = 0;
+   public ProductRecord(IVendingMachineProduct product) {
+    if (product == null) throw new IllegalArgumentException("Product cannot be null");
+    this.product = product;
+    this.numberOfSales = 0;
+    this.numberAvailable = 0;
+
+    // Add only if not already in the list
+    if (!availableProducts.contains(product.getDescription())) {
+        availableProducts.add(product.getDescription());
     }
+}
+
 
     @Override
     public IVendingMachineProduct getProduct() {
@@ -57,5 +66,12 @@ public class ProductRecord implements IProductRecord {
         }
         numberAvailable--;
         numberOfSales++;
+    }
+
+    /**
+     * Returns a copy of the list of all available product names.
+     */
+    public static List<String> getAvailableProducts() {
+        return new ArrayList<>(availableProducts);
     }
 }
