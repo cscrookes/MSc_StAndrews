@@ -1,0 +1,3 @@
+Steps I took:
+npm create vite@latest my-app -- --template react
+npm run dev
