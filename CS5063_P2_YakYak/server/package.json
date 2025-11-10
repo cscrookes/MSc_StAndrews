@@ -1,0 +1,17 @@
+{
+  "name": "yakyakserver",
+  "version": "1.0.0",
+  "description": "A server for the YakYak microblogging platfrom.",
+  "license": "ISC",
+  "author": "David Morrison",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jest": "^30.2.0"
+  }
+}
