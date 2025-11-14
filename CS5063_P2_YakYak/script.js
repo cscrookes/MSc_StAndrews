@@ -15,22 +15,44 @@ async function fetchYaks(offset = 0, search = null) {
 
   const timeline = document.getElementById("timeline");
   timeline.innerHTML = "";
-  data.items.forEach(yak => {
-    const yakDiv = document.createElement("div");
-    yakDiv.id = `yak-${yak.id}`;
-    yakDiv.innerHTML = `
-      <strong>${yak.author_name}</strong> (${new Date(yak.created_at).toLocaleString()}):
-      <p>${yak.text}</p>
-      <p>Likes: <span class="like-count">${yak.likes}</span> 
-        <button onclick="likeYak(${yak.id})">Like</button>
-        <button onclick="replyYak(${yak.id})">Reply</button>
-        <button onclick="deleteYak(${yak.id})">Delete</button>
-      </p>
-      ${yak.reply_to ? `<small>Reply to Yak #${yak.reply_to}</small>` : ""}
-      <hr>
-    `;
-    timeline.appendChild(yakDiv);
-  });
+
+// Group yaks by parent
+const byParent = {};
+data.items.forEach(yak => {
+  const parent = yak.reply_to || 0;
+  if (!byParent[parent]) byParent[parent] = [];
+  byParent[parent].push(yak);
+});
+
+// Recursive renderer
+function renderYak(yak, container) {
+  const yakDiv = document.createElement("div");
+  yakDiv.classList.add("yak");
+  yakDiv.id = `yak-${yak.id}`;
+
+  yakDiv.innerHTML = `
+    <strong>${yak.author_name}</strong> (${new Date(yak.created_at).toLocaleString()}):
+    <p>${yak.text}</p>
+    <p>Likes: <span class="like-count">${yak.likes}</span>
+      <button onclick="likeYak(${yak.id})">Like</button>
+      <button onclick="replyYak(${yak.id})">Reply</button>
+      <button onclick="deleteYak(${yak.id})">Delete</button>
+    </p>
+    <div class="replies"></div>
+    <hr>
+  `;
+
+  container.appendChild(yakDiv);
+
+  // Render replies nested inside
+  if (byParent[yak.id]) {
+    const repliesDiv = yakDiv.querySelector(".replies");
+    byParent[yak.id].forEach(reply => renderYak(reply, repliesDiv));
+  }
+}
+
+// Render only top-level yaks
+(byParent[0] || []).forEach(yak => renderYak(yak, timeline));
 
   // Handle pagination buttons
   document.getElementById("prevPage").disabled = !data.links.prev;
